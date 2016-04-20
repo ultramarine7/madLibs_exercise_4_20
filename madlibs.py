@@ -11,7 +11,6 @@ AWESOMENESS = [
     'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
     'brilliant', 'ducky', 'coolio', 'incredible', 'wonderful', 'smashing', 'lovely']
 
-
 @app.route('/')
 def start_here():
     """Homepage."""
@@ -47,8 +46,26 @@ def show_game_form():
 
     if choice == "yes":
         return render_template("game.html")
+    elif choice == "no":
+        return render_template("goodbye.html")
     else:
         return render_template("goodbye.html")
+
+@app.route('/madlib')
+def show_madlib():
+    """Play madlib game."""
+
+
+    person = request.args.get("personname")
+    color = request.args.get("color")
+    noun = request.args.get("noun")
+    adjective = request.args.get("adjective")
+
+    return render_template("madlib.html",
+                            person=person,
+                            color=color,
+                            noun=noun,
+                            adjective=adjective)
 
 
 if __name__ == '__main__':
